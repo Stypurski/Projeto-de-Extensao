@@ -1,0 +1,3 @@
+<?php
+header("Location: loja.php");
+exit();
