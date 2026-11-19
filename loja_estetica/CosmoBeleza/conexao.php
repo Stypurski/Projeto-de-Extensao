@@ -11,5 +11,5 @@ if (!$conexao) {
     die("Erro ao conectar ao banco: " . mysqli_connect_error());
 }
 
-// echo "Conectado ao banco!";
+mysqli_set_charset($conexao, "utf8mb4");
 ?>
