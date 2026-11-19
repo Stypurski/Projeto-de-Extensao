@@ -1,21 +1,10 @@
--- phpMyAdmin SQL Dump
--- Banco de dados: `loja_estetica`
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 CREATE DATABASE IF NOT EXISTS `loja_estetica` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `loja_estetica`;
-
--- --------------------------------------------------------
--- Estrutura da tabela `administrador` (NOVA)
--- --------------------------------------------------------
+SET NAMES utf8mb4;
 
 CREATE TABLE `administrador` (
   `id_adm` int(11) NOT NULL,
@@ -27,10 +16,6 @@ CREATE TABLE `administrador` (
 INSERT INTO `administrador` (`id_adm`, `nome`, `email`, `senha`) VALUES
 (1, 'Luciana Ferreira', 'admin@cosmobeleza.com.br', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
--- --------------------------------------------------------
--- Estrutura da tabela `cliente`
--- --------------------------------------------------------
-
 CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
   `nome_completo` varchar(80) NOT NULL,
@@ -39,10 +24,6 @@ CREATE TABLE `cliente` (
   `telefone` varchar(20) NOT NULL,
   `senha` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
--- Estrutura da tabela `produtos`
--- --------------------------------------------------------
 
 CREATE TABLE `produtos` (
   `id_produto` int(11) NOT NULL,
@@ -59,10 +40,6 @@ INSERT INTO `produtos` (`id_produto`, `nome`, `valor`, `imagem`) VALUES
 (8, 'Sérum Rejuvenecedor', 29.90, 'https://images.pexels.com/photos/7005936/pexels-photo-7005936.jpeg'),
 (9, 'Gel Limpeza', 42.90, 'https://images.pexels.com/photos/30804152/pexels-photo-30804152.jpeg');
 
--- --------------------------------------------------------
--- Estrutura da tabela `pedido`
--- --------------------------------------------------------
-
 CREATE TABLE `pedido` (
   `id_pedido` int(11) NOT NULL,
   `data` date DEFAULT NULL,
@@ -71,20 +48,12 @@ CREATE TABLE `pedido` (
   `id_cliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
--- Estrutura da tabela `pedido_produto`
--- --------------------------------------------------------
-
 CREATE TABLE `pedido_produto` (
   `id_pedido` int(11) NOT NULL,
   `id_produto` int(11) NOT NULL,
   `quantidade` int(11) NOT NULL DEFAULT 1,
   `valor_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
--- Estrutura da tabela `pagamento`
--- --------------------------------------------------------
 
 CREATE TABLE `pagamento` (
   `id_pagamento` int(11) NOT NULL,
@@ -95,10 +64,6 @@ CREATE TABLE `pagamento` (
   `cvv` varchar(3) DEFAULT NULL,
   `id_pedido` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
--- Índices e Chaves Primárias
--- --------------------------------------------------------
 
 ALTER TABLE `administrador`
   ADD PRIMARY KEY (`id_adm`),
@@ -123,10 +88,6 @@ ALTER TABLE `pagamento`
   ADD PRIMARY KEY (`id_pagamento`),
   ADD KEY `fk_pagamento_pedido` (`id_pedido`);
 
--- --------------------------------------------------------
--- AUTO_INCREMENT
--- --------------------------------------------------------
-
 ALTER TABLE `administrador`
   MODIFY `id_adm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
@@ -142,10 +103,6 @@ ALTER TABLE `pedido`
 ALTER TABLE `pagamento`
   MODIFY `id_pagamento` int(11) NOT NULL AUTO_INCREMENT;
 
--- --------------------------------------------------------
--- Chaves Estrangeiras (Restrições)
--- --------------------------------------------------------
-
 ALTER TABLE `pedido`
   ADD CONSTRAINT `fk_pedido_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`);
 
@@ -157,7 +114,3 @@ ALTER TABLE `pagamento`
   ADD CONSTRAINT `fk_pagamento_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`);
 
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;ONNECTION=@OLD_COLLATION_CONNECTION */;
